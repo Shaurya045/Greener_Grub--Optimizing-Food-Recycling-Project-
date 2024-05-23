@@ -1,5 +1,5 @@
 import {React,useContext} from "react";
-import BCKVID from "../assets/backgroundVideo.mp4"
+// import BCKVID from "../assets/backgroundVideo.mp4"
 import { Link } from "react-router-dom";
  import { AuthContext } from "../AuthContext";
 
@@ -32,12 +32,12 @@ const Content = () => {
   
   return (
     <>
-    <div id="layer"></div>
+    {/* <div id="layer"></div>
     <div className="video-background">
       <video autoPlay loop muted>
         <source src={BCKVID} type="video/mp4"/>
       </video>
-    </div>
+    </div> */}
     <div className="content">
     <h1>
         <div className="main-heading">

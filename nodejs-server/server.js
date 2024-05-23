@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const app = express();
 
@@ -19,11 +20,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // MongoDB configuration
-const mongoURI = "mongodb+srv://ranjeshroy97099:6RctkOg5FDTYJQyE@cluster0.ojdnbzz.mongodb.net/?retryWrites=true&w=majority";
+// const mongoURI = process.env.mongoURI;
 mongoose
-  .connect(mongoURI, {
+  .connect(process.env.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: GreenerGrub,
   })
   .then(() => console.log("Greener GRUB Database Connected"))
   .catch((err) => {
@@ -180,7 +182,7 @@ app.post("/donate", verifyToken, (req, res) => {
 
   // Save the donation to the donation database
   newDonation
-    .save() 
+    .save()
     .then((donation) => {
       res.json(donation);
     })
@@ -316,7 +318,7 @@ const WasteData = mongoose.model("WasteData", wasteSchema);
 app.post("/waste", verifyToken, (req, res) => {
   const { foodItem, foodQuantity, foodReason, foodWasteDate, foodAddTxt } =
     req.body;
-    const userId = req.userId;
+  const userId = req.userId;
   if (
     !foodItem ||
     !foodQuantity ||
